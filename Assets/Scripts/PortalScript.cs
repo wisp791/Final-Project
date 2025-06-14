@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Gravity { Upright = 1, Upsidedown = -1};
+
 
 public class PortalScript : MonoBehaviour
 {
