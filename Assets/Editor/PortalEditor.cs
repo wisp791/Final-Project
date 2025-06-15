@@ -5,7 +5,7 @@ public class PortalEditor : Editor
 {
     public enum DisplayCategory
     {
-        Gamemode, Speed, gravity
+        Gamemode, Speed, Gravity
     }
     public DisplayCategory categoryToDisplay;
  
@@ -24,7 +24,7 @@ public class PortalEditor : Editor
                     categoryToDisplay = DisplayCategory.Gamemode;
                     break;
                 case 2:
-                    categoryToDisplay = DisplayCategory.gravity;
+                    categoryToDisplay = DisplayCategory.Gravity;
                     break;
             }
         }
@@ -43,7 +43,7 @@ public class PortalEditor : Editor
                 DisplayProperty("Speed", 2);
                 break;
  
-            case DisplayCategory.gravity:
+            case DisplayCategory.Gravity:
                 DisplayProperty("gravity", 0);
                 break;
  
