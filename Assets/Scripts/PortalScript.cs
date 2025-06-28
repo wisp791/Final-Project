@@ -11,6 +11,6 @@ public class PortalScript : MonoBehaviour
  
     public void initiatePortal(Movement movement)
     {
-        movement.ChangeThroughPortal(Gamemode, Speed, gravity ? 1 : -1, State);
+        movement.ChangeThroughPortal(Gamemode, Speed, gravity ? 1 : -1, State, transform.position.y);
     }
 }

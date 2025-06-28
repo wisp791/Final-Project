@@ -11,7 +11,9 @@ public class Movement : MonoBehaviour
     public Gamemodes CurrentGamemode;
     //                       0      1      2       3      4
     float[] SpeedValues = { 8.6f, 10.4f, 12.96f, 15.6f, 19.27f };
- 
+    [System.NonSerialized] public int[] screenHeightValues = { 11, 10, 8, 10, 10, 11, 9 };
+    [System.NonSerialized] public float yLastPortal = -2.3f;
+
     public float GroundCheckRadius;
     public LayerMask GroundMask;
     public Transform Sprite;
@@ -108,7 +110,7 @@ public class Movement : MonoBehaviour
         generic.createGamemode(rb, this, true, 238.29f, 6.2f, false, true, 0, 238.29f);
     }
  
-    public void ChangeThroughPortal(Gamemodes Gamemode, Speeds Speed, int gravity, int State)
+    public void ChangeThroughPortal(Gamemodes Gamemode, Speeds Speed, int gravity, int State, float yPortal)
     {
         switch (State)
         {
@@ -116,6 +118,7 @@ public class Movement : MonoBehaviour
                 CurrentSpeed = Speed;
                 break;
             case 1:
+                yLastPortal = yPortal;
                 CurrentGamemode = Gamemode;
                 break;
             case 2:

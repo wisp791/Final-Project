@@ -24,7 +24,7 @@ public class FollowPlayer : MonoBehaviour
         else
             StaticCam(firstFrame, playerScript.yLastPortal, playerScript.screenHeightValues[(int)playerScript.CurrentGamemode]);
  
-        Background.localPosition = new Vector3((-player.position.x * 0.5f) + Mathf.Floor(player.transform.position.x / 96) * 48, 2.2f, 10);
+        BackGround.localPosition = new Vector3((-Player.position.x * 0.5f) + Mathf.Floor(Player.transform.position.x / 96) * 48, 2.2f, 10);
         transform.position = newVector;
         firstFrame = false;
     }
