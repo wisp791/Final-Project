@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
     {
         generic.createGamemode(rb, this, true, 19.5269f, 9.057f, true, false, 409.1f);
     }
- 
+
     void Ship()
     {
         rb.gravityScale = 2.93f * (Input.GetMouseButton(0) ? -1 : 1) * Gravity;
@@ -109,6 +109,7 @@ public class Movement : MonoBehaviour
     {
         generic.createGamemode(rb, this, true, 238.29f, 6.2f, false, true, 0, 238.29f);
     }
+
  
     public void ChangeThroughPortal(Gamemodes Gamemode, Speeds Speed, int gravity, int State, float yPortal)
     {
