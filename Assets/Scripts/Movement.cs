@@ -7,6 +7,7 @@ public enum Gamemodes { Cube = 0, Ship = 1, Ball = 2, UFO = 3, Wave = 4, Robot =
  
 public class Movement : MonoBehaviour
 {
+    public Transform startingPos;
     public Speeds CurrentSpeed;
     public Gamemodes CurrentGamemode;
     //                       0      1      2       3      4
@@ -14,6 +15,7 @@ public class Movement : MonoBehaviour
     [System.NonSerialized] public int[] screenHeightValues = { 11, 10, 8, 10, 10, 11, 9 };
     [System.NonSerialized] public float yLastPortal = -2.3f;
 
+    public Transform GroundCheckTransform;
     public float GroundCheckRadius;
     public LayerMask GroundMask;
     public Transform Sprite;
@@ -32,11 +34,29 @@ public class Movement : MonoBehaviour
     {
         transform.position += Vector3.right * SpeedValues[(int)CurrentSpeed] * Time.deltaTime;
         Invoke(CurrentGamemode.ToString(), 0);
+
+        if (OnGround())
+        {
+            Vector3 Rotation = Sprite.rotation.eulerAngles;
+            Rotation.z = Mathf.Round(Rotation.z / 90) * 90;
+            Sprite.rotation = Quaternion.Euler(Rotation);
+
+            if (Input.GetMouseButton(0))
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(Vector2.up * 26.6581f, ForceMode2D.Impulse);
+            }
+        }
+        else
+        {
+            Sprite.Rotate(Vector3.back * 5);
+        }
     }
- 
+
+
     public bool OnGround()
     {
-        return Physics2D.OverlapBox(transform.position + Vector3.down * Gravity * 0.5f, Vector2.right * 1.1f + Vector2.up * GroundCheckRadius, 0, GroundMask);
+        return Physics2D.OverlapBox(GroundCheckTransform.position + Vector3.down * Gravity * 0.5f, Vector2.right * 1.1f + Vector2.up * GroundCheckRadius, 0, GroundMask);
     }
  
     bool TouchingWall()
@@ -135,5 +155,16 @@ public class Movement : MonoBehaviour
         PortalScript portal = collision.gameObject.GetComponent<PortalScript>();
         if (portal)
             portal.initiatePortal(this);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            //kill player
+            gameObject.transform.SetPositionAndRotation(startingPos.position, Quaternion.identity);
+            
+
+        }
     }
 }

@@ -19,14 +19,7 @@ public class FollowPlayer : MonoBehaviour
     {
         newVector = new Vector3(Player.position.x + cameraOffset.x, newVector.y, -10);
  
-        if (playerScript.screenHeightValues[(int)playerScript.CurrentGamemode] > 10)
-            FreeCam(firstFrame);
-        else
-            StaticCam(firstFrame, playerScript.yLastPortal, playerScript.screenHeightValues[(int)playerScript.CurrentGamemode]);
- 
-        BackGround.localPosition = new Vector3((-Player.position.x * 0.5f) + Mathf.Floor(Player.transform.position.x / 96) * 48, 2.2f, 10);
         transform.position = newVector;
-        firstFrame = false;
     }
  
     void FreeCam(bool doInstantly) 
