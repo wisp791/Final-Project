@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 rb.velocity = Vector2.zero;
-                rb.AddForce(Vector2.up * 26.6581f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 22.5f, ForceMode2D.Impulse);
             }
         }
         else
