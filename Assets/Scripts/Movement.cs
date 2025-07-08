@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -159,12 +160,25 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            //kill player
-            gameObject.transform.SetPositionAndRotation(startingPos.position, Quaternion.identity);
-            
+            if (contact.normal.y > 0.9f || contact.normal.y < -0.9f) // Or use a more precise threshold
+            {
+                Debug.Log("Collision from the top!");
+                
+            }
+            else
+            {
+                if (collision.gameObject.tag == "Obstacle")
+                {
+                    //kill player
+                    gameObject.transform.SetPositionAndRotation(startingPos.position, Quaternion.identity);
+                    CurrentGamemode = Gamemodes.Cube;
 
+
+                }
+            }
         }
+        
     }
 }
